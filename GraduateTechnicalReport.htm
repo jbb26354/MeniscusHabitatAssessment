@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="windows-1252">
+<title>GSP 533 Spring 2016 Graduate Technical Report</title>
+
+<style>
+
+BODY{line-height:28.8pt;font-size:10.0pt;font-family:"Arial";width:800px;}
+
+BR{clear:both; page-break-before:always;}
+LI{}
+
+HEADER{display:block;text-align:center;}
+NAV{display:block;padding:10px;font-weight:bold;}
+SECTION {max-width:98%;}
+ARTICLE{padding: 10px;border-radius:10px;}
+ASIDE{display:block;width:25%;float:left;font-style:italic;}
+FOOTER{clear:both;display: block;padding:15px;}
+FIGURE{padding: 8px;}
+FIGIMAGE{break-after:always;}
+FIGCAPTION{font-style:italic;font-size: smaller;}
+
+H1{line-height:28.8pt;page-break-after:avoid;font-size:24.0pt;font-family:"Times New Roman";font-weight:bold;}
+H2{line-height:28.8pt;page-break-after:avoid;font-size:18.0pt;font-family:"Times New Roman";font-weight:bold;}
+H3{line-height:28.8pt;page-break-after:avoid;font-size:14.0pt;font-family:"Times New Roman";font-weight:bold;}
+H4{line-height:28.8pt;page-break-after:avoid;font-size:12.0pt;font-family:"Times New Roman";font-weight:bold;}
+H5{line-height:28.8pt;page-break-after:avoid;font-size:10.0pt;font-family:"Times New Roman";font-weight:bold;}
+
+CODE{font-family:"Courier";}
+
+PRE
+{
+ tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+ font-size:9.0pt;
+ font-family:"Courier";
+}
+
+.important{font-family:"Verdana";color:red;font-weight:bold;}
+.underlineIt{font-weight:bold;text-decoration:underline;text-underline:single;}
+.done{background:lightgrey;}
+.groupproject{background:#AAFFAA;}
+.silverBack{background:#F0F0F0;}
+.articletitle{color:#1047A9;}
+.periodicaltitle{color:#A101A6;}
+.volume{color:#A65200;}
+.pages{color:#FFD900;}
+.publicationplace{color:#00AA72;}
+.publisher{color:#34D800;}
+.otherinfo{color:#666666;}
+.citationsuper{font-size:11.0pt;color:#0645AD;}
+.citationdiv{background:#F9F9F9;font-size:12.0pt;}
+.citationsub{font-size:12.0pt;}
+.smallred{line-height:18.0pt;font-size:7.5pt;color:#A81817;}
+.smallGrey{font-size:7.5pt;font-family:Arial;color:gray;}
+.diffchange{font-size:12.0pt;color:silver;font-weight:bold;text-decoration:underline;text-underline:single;}
+.titleLine{line-height:57.6pt;text-align:center;font-size:14.0pt;font-family:"Times New Roman";}
+.articleText{"text-align:justify;font-size:12.0pt;}
+
+</style>
+
+</head>
+
+<body>
+
+<p class="titleLine" style="font-size:18pt;">Meniscus Habitat Assessment</p>
+<p style="line-height:normal;text-align:center;">
+  GSP 533 Spring 2016 Session C<br>
+  John Bonifas<br>
+  5/17/2016
+</p>
+
+<br>
+
+<h2>Introduction</h2>
+  
+<p class="articleText">
+  Hedeoma diffusum (Flagstaff Pennyroyal) is a small perennial herb that grows in central Arizona, mainly in alpine areas 
+  surrounding Flagstaff between 4500 and 7000 feet in elevation. It prefers shallow soil in exposed limestone outcrops and cracks.
+</p> 
+
+<p class="articleText">
+  Hedeoma diffusum is currently threatened by development, heavy grazing, and ORV activities. The authorities have recommended that 
+  it be added to the Arizona Native Plant Law protected plants list, and it is about to receive an official status of Threatened by 
+  the U.S. Fish and Wildlife Service.
+</p>
+
+<p class="articleText">We performed the following tasks in this project:</p>
+
+<ul type="disc">
+  <li>Created a predictive model to identify new potential habitats for Hedeoma diffusum</li>
+  <li>Identified areas of human activity within the study area</li>
+  <li>Removed, from the identified areas of potential habitat for Hedeoma diffusum, the identified areas of human activity</li>
+</ul>
+
+
+<h2>Methodology</h2>
+
+<p class="articleText">
+  We started by obtaining vector and raster data to be used for further editing and analysis. That included coordinate data 
+  from the BLM, and raster data in DRG format. Once we had the study area delineated in the GIS software, we created vector 
+  feature classes that define the roads, rivers, soil types, tree coverage, water tanks, power lines, and other vector entities 
+  that are located in the Meniscus study area.
+</p>
+
+<p class="articleText">
+  After importing all completed GIS feature class layers into a geodatabase, we added the required raster data and perform 
+  various spatial analysis techniques to determine where potential meniscus habitat sites might be, that are an appropriate 
+  distance away from human activity. Finally, we created a spatial model that predicts soil depth for the Meniscus project area.
+</p>
+
+<h2>Data Manipulation and Major Analyses</h2>
+
+<h3>Identification of New Areas of Potential Plant Habitat - Part 1</h3>
+<p class="articleText">
+A comprehensive schema of all data used and manipulated in this project is in Appendix A. </p>
+<p class="articleText">The criteria we chose to determine ideal potential plant habitats are listed below:</p>
+<ul type="disc">
+<li>Within ponderosa pine stands</li>
+<li>Shallow, eutroboraif soils between 4 - 6 inches deep</li>
+<li>Elevation between 6640 - 7500 feet</li>
+<li>A certain distance away from dominant human activity</li>
+<li>South&nbsp;to west facing slope</li>
+</ul>
+<p class="articleText">Preparation for analysis began by creating a new geodatabase, and importing several features, including  a table with vegetation type data, a feature class representing the tree canopy, and a feature class representing the roads crossing the study area. </p>
+<p class="articleText">Our first step was to determine areas of potential Meniscus habitat. We determined which roads crossed ponderosa pine stands in the study area by merging the tree canopy layer with the vegetation type table, selecting only the Ponderosa Pine forest type, then selecting by intersection. To determine which water tanks on private lands were within a 300' distance of a road in the study area, we did a select by proximity, then filtered by owner and by containment within private land.&nbsp;</p>
+<p class="articleText">We then imported a soil feature class and soil type attribute table, merged the two,&nbsp;filtered two soil types out, then performed an intersect overlay between the soil types feature and the canopy/vegetation feature. This produced a feature class that identified new potential plant habitat areas.</p>
+<p class="articleText">We then created a road buffer feature, and performed an intersect overaly to determine areas that were both private land and within the road buffer distance. Finally we performed an intersect overlay with the habitat areas feature and the human activity feature, to create a feature containing potential plant habitat areas away from human activity.</p>
+
+<figure>
+  <figimage><img src="../labs/lab5/assets/Image_015.png"></figimage>
+  <figcaption>Potential habitat areas away from human activity, without slope and solar aspect parameters</figcaption>
+</figure>
+
+<h3>Identification of New Areas of Potential Plant Habitat - Part 2</h3>
+
+<p class="articleText"> At this point, we had an analysis of all the above habitat criteria except one - sunny slopes. This required a 3-step separate digital terrain analysis process,&nbsp;described as follows. First, we downloaded the required USGS Digital Elevation Model blocks for the study area,&nbsp;and because we were using ArcGIS software for the analyses, we converted the DEMs to ESRI GRIDs. Some of the models were in STDS format, and 1 large model came from the National Elevation Dataset. These were also converted to ESRI GRIDs.&nbsp;</p>
+
+<p class="articleText">Once the 4 GRIDs were created, we used a python script and map algebra to perform a merge of the GRIDs.  Because the rest of our data was projected into UTM zone 12, and the resultant GRID raster was not projected as GCS in NAD 1983, we used ArcCatalog to reproject it into UTM 12.</p>
+
+<figure>
+  <figimage><img src="../labs/lab7/assets/Image_009.png"></figimage>
+  <figcaption>Meniscus DEM (study area Digital Elevation Model)</figcaption>
+</figure>
+
+<h3>Digital Terrain Analysis</h3>
+
+<p class="articleText">We were now prepared to perform the required digital terrain analyses. &nbsp;All analysis tools we used were located in the ArcGIS Spatial Analyst toolbox. Our main input data to the slope and solar aspect analyses, in addition to several others, was the DEM of the Meniscus study area.</p>
+
+<figure>
+  <figimage><img src="assets/SurfaceAnalysesWorkflow.png" width="800"></figimage>
+  <figcaption>Surface Analysis Workflow</figcaption>
+</figure>
+
+<p class="articleText">We used the contour tool to create a feature class containing the elevation contours for the study area. All other analysis outputs were rasters. We used the Aspect tool to create the solar aspect raster, and the Slope tool to create the slope raster. </p>
+<h3>Hydrological Analysis</h3>
+<p class="articleText">The analysis used to define a watershed for the Meniscus study area was entirely automated using the ArcGIS Python facility.  A workflow&nbsp;for the analysis is shown below.</p>
+
+<figure>
+  <figimage><img src="../labs/lab7/Deliverables/Lab7/Hydrology/HydrologicalAnalysis.png"></figimage>
+  <figcaption>Meniscus Project Hydrological Analysis Processing Workflow (ArcMap ModelBuilder)</figcaption>
+</figure>
+
+<p class="articleText">Here, we used the Fill and Flow Direction Spatial Analyst tools to create intermediate input rasters that we fed into the Watershed tool, creating the shape of the watershed, shown below.</p>
+<figure>
+<figimage><img src="assets/MeniscusWatershed.png"></figimage>
+  <figcaption>Meniscus Project Hydrological Analysis: Study Area Watershed</figcaption>
+</figure>
+
+<h3>Meniscus Study Area Soil Depth Prediction Model</h3>
+
+<p class="articleText">We now had all the data representing the criteria we listed above to  begin building the soil depth prediction model; we just needed to do some preliminary preprocessing to the input rasters, so that they would be valid parameters to the model building tool. We also obtained a feature class containing the soil depth at some sample locations within the study area.</p>
+<p class="articleText">We used map algebra to modify certain rasters to filter out undesired data. &nbsp;To modify our solar aspect raster so that it only contained southern facing slopes, we filtered out slopes in the undesired direction. So that our input canopy raster contained only ponderosa pine stands, we filtered out non ponderosa pine stands. So that our  soil types raster&nbsp;contained only eutroboraif soils, we filtered the rest out. </p>
+<p class="articleText">We then used the Extract Values To Points tool on the above rasters, and the soil depth samples, to convert them into their respective feature class equivalents. To create proximity data of each sample location to the nearest stream channel, we ran the sample points feature class and a feature class containing stream locations in the study area&nbsp;through the Spatial Analyst Near Tool.</p>
+<p class="articleText">So that all calculated data for the prediction model would be in the same feature class input file, we created fields for each criteria parameter in the sample points feature class, and copied all prepared data for all parameters to the model building tool into the sample points feature class input file.</p>
+<p class="articleText">Finally, we input the resulting sample points feature class into the Ordinary Least&nbsp;Squares spatial regression tool&nbsp;using the Depth field as a parameter, and this operation created our soil depth prediction model equation.</p>
+
+<figure>
+<figimage><img src="assets/SoilDepthRegressionMap.png" width="640"></figimage>
+  <figcaption>Final Regression Model Map.</figcaption>
+</figure>
+
+<h2>Conclusion and Discussion</h2>
+
+<p class="articleText">This project has a lot of potential future work, especially when temporal aspects are considered. For example, the data analyzed was a snapshot of what's out there in the study area at time of data capture; private lands grow and shrink, stream channels change, changes in year-to-year rainfall can change the size of the canopy, etc. </p>
+
+<p class="articleText">Also, hydrologists studying their earthen dam's impact on the study area's watershed and indigent life depending on it could use the data we have collected and created.</p>
+
+<p class="articleText">The data gathering and manipulation processes of this project could be fully automated and running continously, again providing valuable information to decision makers showing how the project parameters of the study area are changing over time.</p>
+
+<p class="articleText">Finally, the ArcGIS software suite is not the only robust GIS suite out there. It is an expensive, proprietary, and highly protected piece of software; however, open source suites such as QGIS can in many cases provide as good or greater performance&nbsp;than ESRI's flagship product. Decision makers that know of the power of GIS software, but are&nbsp;mindful of the ArcGIS suite's cost, could instead utilize an open source alternative.</p>
+
+<h2>Appendix A: Data Dictionary and Schema</h2>
+
+<p class="articleText">Primitive data types used by size:</p>
+<span style="padding-left:25px;">Boolean, Integer (16-bit), Long Integer (32-bit), Character, String, Single precision floating point, Double precision floating point,</span>
+<span style="padding-left:25px;">Array, Object</span>
+
+<h3>Spatial Features and Rasters</h3>
+
+<table width="98%" border="1">
+  <tr>
+    <th>Item</th>
+    <th>Type</th>
+    <th>Source</th>
+    <th>Projection</th>
+    <th>Filename</th>
+    <th>Date</th>
+  </tr>
+  <tr>
+    <td>uhh</td>
+    <td>uhh</td>
+    <td>uhh</td>
+    <td>uhh</td>
+    <td>uhh</td>
+    <td>uhh</td>
+  </tr>
+</table>
+
+</body>
+</html>
